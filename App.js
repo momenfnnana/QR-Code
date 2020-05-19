@@ -10,7 +10,8 @@ import { AppLoading } from 'expo'
 import QrCodeScane from './src/screens/QRCodeScan'
 import QrCodeCard from './src/screens/QRCodeCard';
 import WhoUs from './src/screens/WhoUs';
-
+import { Provider as AuthProvider } from './src/Context/AuthContext'
+import {setNavigate} from './src/component/navigationRef'
 const fetchFonts = () => {
   return Font.loadAsync({
     'cairo': require('./assets/Cairo-SemiBold.ttf'),
@@ -20,27 +21,27 @@ const fetchFonts = () => {
 
 const Nav = createStackNavigator({
   first: {
-    screen:Login,
-    navigationOptions:{
-      headerShown:false
+    screen: Login,
+    navigationOptions: {
+      headerShown: false
     }
   },
   seconde: {
-    screen:WhoUs,
-    navigationOptions:{
-      headerShown:false
+    screen: WhoUs,
+    navigationOptions: {
+      headerShown: false
     }
   },
   third: {
-    screen:QrCodeScane,
-    navigationOptions:{
-      headerShown:false
+    screen: QrCodeScane,
+    navigationOptions: {
+      headerShown: false
     }
   },
-  fourth:{
-    screen:QrCodeCard,
-    navigationOptions:{
-      headerShown:false
+  fourth: {
+    screen: QrCodeCard,
+    navigationOptions: {
+      headerShown: false
     }
   }
 })
@@ -81,6 +82,8 @@ export default () => {
     return Promise.all(cacheImages);
   }
   return (
-    <App />
+    <AuthProvider>
+      <App ref={(nav) => setNavigate(nav)}/>
+    </AuthProvider>
   )
 }

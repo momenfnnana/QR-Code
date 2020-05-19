@@ -1,47 +1,29 @@
-import React,{useState,useContext} from 'react'
+import React, { useState, useContext } from 'react'
 import { View, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
+import { NavigationEvents } from 'react-navigation'
 import { Text } from 'react-native-elements'
 import Logo from '../component/Logo'
 import Header from '../component/Header'
 import ClickButton from '../component/ClickButton'
 import Spacer from '../component/Spacer'
 import Footer from '../component/Footer'
-import {Context} from '../Context/AuthContext'
+import { Context } from '../Context/AuthContext'
 import Form from '../component/Form'
 const Login = ({ navigation }) => {
     const { state, signin, clearErrorMessage } = useContext(Context);
-    const [name,setName] = useState('')
-    const [pass,setPass] = useState('')
     return (
-        <View
-            style={styles.container}
-        >
+        <View style={styles.container}>
+            <NavigationEvents onWillBlur={clearErrorMessage} />
             <Header />
-            <Form />
-            {/* <Logo />
-            <ClickButton
-                title='اسم المستخدم'
-                value={name}
-                onChangeText={setName}
-                state={state.errorMessage}
+            <Form
+                onClick={signin}
+                // onClick={()=>navigation.navigate('third')}
+                State={state.errorMessage}
             />
-            <Spacer />
-            <ClickButton
-                title='كلمة السر'
-                value={pass}
-                onChangeText={setPass}
-                state={state.errorMessage}
+            <Footer
+                TextFooter='من نحن'
+                onPress={() => navigation.navigate('seconde')}
             />
-            <Spacer />
-            <Spacer />
-            <TouchableOpacity onPress={signin}>
-                <View style={styles.login}>
-                    <Text style={{ textAlign: 'center', marginTop: 10, color: '#fff', fontFamily: 'cairo-bold' }}>تسجيل الدخول</Text>
-                </View>
-            </TouchableOpacity>
-             <Spacer /> 
-            <Spacer /> */}
-            <Footer TextFooter='من نحن' onPress={() => navigation.navigate('seconde')} />
         </View>
     )
 }

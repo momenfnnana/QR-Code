@@ -7,6 +7,7 @@ const Logo =  () =>{
         <View>
             <Image 
                 source={require('../../assets/Logo.png')}
+                style={{alignSelf:'center'}}
             />
         </View>
     )

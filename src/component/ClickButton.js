@@ -2,18 +2,18 @@ import React from 'react'
 import { View, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native'
 import { Text, Button } from 'react-native-elements'
 
-const ClickButton = ({ title, value, onChangeText, state }) => {
+const ClickButton = ({ title, value, onChangeText, state, Type }) => {
     return (
-        <TouchableOpacity>
             <View style={styles.Button}>
                 <TextInput
                     style={styles.Input}
                     placeholder={title}
                     value={value}
                     onChangeText={onChangeText}
+                    textContentType={Type}
+                    secureTextEntry
                 />
             </View>
-        </TouchableOpacity>
     )
 }
 const styles = StyleSheet.create({

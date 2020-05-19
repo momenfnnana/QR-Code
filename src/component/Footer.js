@@ -9,7 +9,7 @@ const Footer = ({onPress,TextFooter}) => {
                 source={require('../../assets/Nav.png')}
                 style={{ resizeMode: 'contain', width: width / 0.99, height: height * 0.25 }}
             />
-            <TouchableOpacity style={{ position: 'absolute', alignSelf: 'center', marginTop: 75}} onPress={onPress}>
+            <TouchableOpacity style={{ position: 'absolute', alignSelf: 'center', marginTop: 70}} onPress={onPress}>
                 <Text style={{  fontSize: 29, color: '#fff',fontFamily: 'cairo-bold',flex:1 }}>{TextFooter}</Text>
             </TouchableOpacity>
         </View>

@@ -1,6 +1,6 @@
 import { AsyncStorage } from "react-native";
 import createDataContext from "./createDataContext";
-import trackerApi from "../api/Api";
+import Api from "../api/Api";
 import { navigate } from "../component/navigationRef";
 const authReducer = (state, action) => {
   switch (action.type) {
@@ -30,20 +30,30 @@ const clearErrorMessage = dispatch => () => {
     type: "clear_Error_Message"
   });
 };
-const signin = dispatch => async ({ email, password }) => {
+
+const signin = dispatch => async ({ name, pass }) => {
   try {
-    const response = await trackerApi.post("/signIn", { email, password });
-    await AsyncStorage.setItem("token", response.data.token);
-    dispatch({ type: "signin", payload: response.data.token });
+    const response = await Api.post("/login",{
+      "grant_type": "password", 
+      username: name,
+      password: pass 
+    });
+    console.log('user name: ',name);
+    console.log('pass: ',pass);
+    console.log('token', response.data.access_token);
+    
+    await AsyncStorage.setItem("token", response.data.access_token);
+    dispatch({ type: "login", payload: response.data.access_token });
     navigate("third");
   } catch (err) {
     console.log(err);
     dispatch({
       type: "add_error",
-      payload: "Someting went wrong with sign in"
+      payload: "Wrong usename or password"
     });
   }
 };
+
 
 export const { Provider, Context } = createDataContext(
   authReducer,
