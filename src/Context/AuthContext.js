@@ -19,9 +19,9 @@ const tryLocalSignin = dispatch =>async()=>{
 const token = await AsyncStorage.getItem('token');
 if(token){
   dispatch({type:'signin',payload:token})
-  navigate('third');
+  navigate('scanner');
 }else{
-  navigate('first')
+  navigate('login')
 }
 }
 
@@ -44,7 +44,7 @@ const signin = dispatch => async ({ name, pass }) => {
     
     await AsyncStorage.setItem("token", response.data.access_token);
     dispatch({ type: "login", payload: response.data.access_token });
-    navigate("third");
+    navigate("scanner");
   } catch (err) {
     console.log(err);
     dispatch({

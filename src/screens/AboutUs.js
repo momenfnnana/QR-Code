@@ -5,7 +5,7 @@ import Header from '../component/Header'
 import Footer from '../component/Footer'
 import Logo from '../component/Logo'
 
-const WhoUs = () => {
+const AboutUs = () => {
     return (
         <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
             <Header />
@@ -38,4 +38,4 @@ const styles = StyleSheet.create({
         color: '#94C422'
     }
 })
-export default WhoUs
+export default AboutUs

@@ -6,18 +6,18 @@ const myAxios = axios.create({
 myAxios.defaults.headers.post['ClientId'] = '2';
 myAxios.defaults.headers.post['ClientSecret'] = 'AWLm7w9Avyfqy25euTZYmzxeA0JftlpYFPzk4QuI';
 myAxios.defaults.headers.post['Content-Type'] = 'application/json';
+myAxios.defaults.headers.post['Accept'] = 'application/json';
 
+myAxios.interceptors.request.use(
+    async (config) => {
+        const token = await AsyncStorage.getItem('token')
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config
+    },
+    (err) => {
+        return Promise.reject(err);
+    }
+)
 export default myAxios;
-// instance.interceptors.request.use(
-//     async (config) => {
-//         const token = await AsyncStorage.getItem('token')
-//         if (token) {
-//             config.headers.Authorization = `Bearer ${token}`;
-//         }
-//         return config
-//     },
-//     (err) => {
-//         return Promise.reject(err);
-//     }
-// )
-// export default instance;

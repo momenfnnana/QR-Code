@@ -33,8 +33,8 @@ const Form = ({onClick}) => {
 
 
     const { state, signin, clearErrorMessage } = useContext(Context);
-    const [name, setName] = useState('')
-    const [pass, setPass] = useState('')
+    const [name, setName] = useState('admin')
+    const [pass, setPass] = useState('123123')
     return (
         <View>
             <Logo />

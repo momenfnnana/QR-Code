@@ -1,13 +1,10 @@
-import React, { useState, useContext } from 'react'
-import { View, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
+import React, { useContext } from 'react'
+import { View, StyleSheet } from 'react-native'
 import { NavigationEvents } from 'react-navigation'
-import { Text } from 'react-native-elements'
-import Logo from '../component/Logo'
 import Header from '../component/Header'
-import ClickButton from '../component/ClickButton'
-import Spacer from '../component/Spacer'
 import Footer from '../component/Footer'
 import { Context } from '../Context/AuthContext'
+// import { WebView } from 'react-native-webview'
 import Form from '../component/Form'
 const Login = ({ navigation }) => {
     const { state, signin, clearErrorMessage } = useContext(Context);
@@ -17,12 +14,11 @@ const Login = ({ navigation }) => {
             <Header />
             <Form
                 onClick={signin}
-                // onClick={()=>navigation.navigate('third')}
                 State={state.errorMessage}
             />
             <Footer
                 TextFooter='من نحن'
-                onPress={() => navigation.navigate('seconde')}
+                onPress={() => navigation.navigate('aboutus')}
             />
         </View>
     )

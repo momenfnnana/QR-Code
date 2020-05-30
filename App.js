@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import { createStackNavigator } from 'react-navigation-stack'
-// import Screen1 from './src/screens/screen1'
-// import Screen2 from './src/screens/screen2'
+import ResolveScreen from './src/screens/ResolveScreen'
 import Login from './src/screens/Login'
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo'
 import QrCodeScane from './src/screens/QRCodeScan'
 import QrCodeCard from './src/screens/QRCodeCard';
-import WhoUs from './src/screens/WhoUs';
+import AboutUs from './src/screens/AboutUs';
 import { Provider as AuthProvider } from './src/Context/AuthContext'
-import {setNavigate} from './src/component/navigationRef'
+import { Provider as QrProvider } from './src/Context/QrContext'
+import { setNavigate } from './src/component/navigationRef'
 const fetchFonts = () => {
   return Font.loadAsync({
     'cairo': require('./assets/Cairo-SemiBold.ttf'),
@@ -20,25 +20,31 @@ const fetchFonts = () => {
 };
 
 const Nav = createStackNavigator({
-  first: {
+  resolve: {
+    screen: ResolveScreen,
+    navigationOptions: {
+      headerShown: false
+    }
+  },
+  login: {
     screen: Login,
     navigationOptions: {
       headerShown: false
     }
   },
-  seconde: {
-    screen: WhoUs,
+  aboutus: {
+    screen: AboutUs,
     navigationOptions: {
       headerShown: false
     }
   },
-  third: {
+  scanner: {
     screen: QrCodeScane,
     navigationOptions: {
       headerShown: false
     }
   },
-  fourth: {
+  scannerresult: {
     screen: QrCodeCard,
     navigationOptions: {
       headerShown: false
@@ -82,8 +88,10 @@ export default () => {
     return Promise.all(cacheImages);
   }
   return (
-    <AuthProvider>
-      <App ref={(nav) => setNavigate(nav)}/>
-    </AuthProvider>
+    <QrProvider>
+      <AuthProvider>
+        <App ref={(nav) => setNavigate(nav)} />
+      </AuthProvider>
+    </QrProvider>
   )
 }
